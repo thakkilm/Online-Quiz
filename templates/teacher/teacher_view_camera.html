@@ -1,0 +1,60 @@
+{% extends 'teacher/teacherbase.html' %}
+{% block content %}
+{%load static%}
+
+<head>
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+  <style media="screen">
+    a:link {
+      text-decoration: none;
+    }
+
+    h6 {
+      text-align: center;
+    }
+
+    .row {
+      margin: 100px;
+    }
+  </style>
+</head>
+<br><br>
+<div class="container">
+Exam: <b>{{exam.course_name}}</b>
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h6 class="panel-title">Student WebCam Images</h6>
+    </div>
+    <table class="table table-hover table-bordered" id="dev-table">
+      <thead>
+        <tr>
+
+          <th>Student</th>
+          <th>Images</th>
+        </tr>
+      </thead>
+      {% for s,il in studentImages.items %}
+      <tr>
+
+        <td> {{s.user.username}}</td>
+        <td>
+            <div style="display: flex; gap: 4px; flex-wrap: wrap; justify-content: space-evenly;">
+                {% for i in il %}
+                    <div style="display: flex; flex-direction: column;">
+                        <img src="{{i.imageData}}" style="width: 300px; height: 200px;" />
+                        {{i.date}}
+                    </div>
+                {% endfor %}
+            </div>
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+</div>
+
+<br><br><br><br><br><br>
+{% endblock content %}
